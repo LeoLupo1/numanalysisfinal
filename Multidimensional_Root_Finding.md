@@ -23,7 +23,7 @@ $$
 F(X) = \mathbf{0},
 $$
 
-where $F$ is a vector-valued function, and $X$ is an $n$-dimensional vector of variables. These methods are vital in applications ranging from engineering and optimization to physics and machine learning, where nonlinear behaviors often arise. <sup>[1](#ref1)</sup>
+where $F$ is a vector-valued function, and $X$ is an $n$-dimensional vector of variables. These methods are vital in applications ranging from engineering and optimization to physics and machine learning, where nonlinear behaviors often arise. <sup>[[1]](#ref1)</sup>
 
 Unlike one-dimensional root-finding methods, which solve $f(x) = 0$, multidimensional methods require solving a system of equations simultaneously. This introduces significant challenges, such as the need to compute or approximate the Jacobian matrix, sensitivity to initial guesses, and higher computational cost.
 
