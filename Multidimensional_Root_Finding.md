@@ -23,7 +23,7 @@ $$
 F(X) = \mathbf{0},
 $$
 
-where $F$ is a vector-valued function, and $X$ is an $n$-dimensional vector of variables. These methods are vital in applications ranging from engineering and optimization to physics and machine learning, where nonlinear behaviors often arise. [1]
+where $F$ is a vector-valued function, and $X$ is an $n$-dimensional vector of variables. These methods are vital in applications ranging from engineering and optimization to physics and machine learning, where nonlinear behaviors often arise. [1](#ref1)
 
 Unlike one-dimensional root-finding methods, which solve $f(x) = 0$, multidimensional methods require solving a system of equations simultaneously. This introduces significant challenges, such as the need to compute or approximate the Jacobian matrix, sensitivity to initial guesses, and higher computational cost.
 
@@ -62,4 +62,4 @@ The goal is to find the equilibrium concentrations $(C_A, C_B)$ where both react
 
 ## References
 
-1. Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Chapter 9: Root finding and nonlinear sets of equations. In *Numerical recipes: The art of scientific computing* (3rd ed.). New York: Cambridge University Press. ISBN 978-0-521-88068-8.
+1.<a id="ref1"></a> Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Chapter 9: Root finding and nonlinear sets of equations. In *Numerical recipes: The art of scientific computing* (3rd ed.). New York: Cambridge University Press. ISBN 978-0-521-88068-8.
