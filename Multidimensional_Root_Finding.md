@@ -46,6 +46,19 @@ Without a method to solve such equations efficiently, progress in astronomy and 
 
 ### Newton's Method
 
+Newton's Method is a 1 dimensional root approximating tequenique. That is, it let's you approximate for the value of x where f(x) = 0.
+
+1. Find the tangent line of the function you are trying to approximate at any random point on the function.
+2. simply find the root of that tangent line.
+3. plug it into this function:
+
+$$
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+$$
+
+
+
+
 Kepler's Equation can be solved using the following iterative formula derived from Newton's Method:
 
 $$
