@@ -46,14 +46,58 @@ Without a method to solve such equations efficiently, progress in astronomy and 
 
 ### Newton's Method
 
-Newton's method works by refining an initial guess for the eccentric anomaly E through an iterative process:
+Kepler's Equation can be solved using the following iterative formula derived from Newton's Method:
 
-![Equation](https://latex.codecogs.com/gif.latex?E_{n+1}%20=%20E_n%20-%20\frac{E_n%20-%20e\sin(E_n)%20-%20M}{1%20-%20e\cos(E_n)})
+$$
+E_{n+1} = E_n - \frac{E_n - e \sin(E_n) - M}{1 - e \cos(E_n)}
+$$
 
+#### Let's say:
+- Mean anomaly \( M = 0.75 \) radians
+- Orbital eccentricity \( e = 0.3 \)
+- Initial guess \( E_0 = 0.75 \) radians
 
-This iteration leverages the first derivative of the equation to adjust the guess, leading to rapid convergence for small values of eccentricity e.
+#### Iteration Steps:
 
-This means that starting with an initial estimate for E, the method calculates a new estimate by evaluating how far the current value is from satisfying Kepler’s Equation. By considering the slope of the curve (i.e., the derivative), the process “zooms in” on the solution with each step. This makes it highly efficient for equations with well-behaved derivatives.
+1. **Iteration 1:**
+
+$$
+E_1 = E_0 - \frac{E_0 - e \sin(E_0) - M}{1 - e \cos(E_0)}
+$$
+
+   Substitute values:
+
+   $$
+   E_1 = 0.75 - \frac{0.75 - 0.3 \sin(0.75) - 0.75}{1 - 0.3 \cos(0.75)}
+   $$
+
+   Simplify:
+
+   $$
+   E_1 \approx 0.784
+   $$
+
+2. **Iteration 2:**
+
+$$
+   E_2 = E_1 - \frac{E_1 - e \sin(E_1) - M}{1 - e \cos(E_1)}
+   $$
+
+   Substitute values:
+
+   $$
+   E_2 = 0.784 - \frac{0.784 - 0.3 \sin(0.784) - 0.75}{1 - 0.3 \cos(0.784)}
+   $$
+
+   Simplify:
+
+   $$
+   E_2 \approx 0.785
+   $$
+
+#### Convergence:
+After two iterations, \( E_2 \) is very close to the true value, demonstrating the rapid convergence of Newton's Method for well-behaved equations like Kepler's.
+
 
 ### Enhanced Techniques from Modern Applications
 
