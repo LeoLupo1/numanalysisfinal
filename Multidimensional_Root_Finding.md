@@ -15,49 +15,70 @@ Title: Challenges and Methods in Multidimensional Root Finding
 - [References](#references)
 
 
-## Overview
+# Multidimensional Methods for Root Finding
 
-Multidimensional root-finding methods are essential tools in numerical analysis, enabling the solution of nonlinear systems of equations represented as:
+## Introduction
 
-$$
-F(X) = \mathbf{0},
-$$
+This article explores multidimensional root-finding methods, providing an overview of how a few key approaches work, their unique characteristics, and the factors that make solving these problems more complex than their one-dimensional counterparts.
 
-where $F$ is a vector-valued function, and $X$ is an $n$-dimensional vector of variables. These methods are vital in applications ranging from engineering and optimization to physics and machine learning, where nonlinear behaviors often arise. <sup>[[1]](#ref1)</sup>
+All Graphics used in this Project were made in Desmos, here is a link to the project "files"
 
-Unlike one-dimensional root-finding methods, which solve $f(x) = 0$, multidimensional methods require solving a system of equations simultaneously. This introduces significant challenges, such as the need to compute or approximate the Jacobian matrix, sensitivity to initial guesses, and higher computational cost.
+## Historical Significance
 
-This paper explores the key methods used in multidimensional root finding, their practical implementations, and the unique challenges they pose. Additionally, it highlights real-world applications and potential areas for future research.
+During the late 17th century, astronomers faced a pressing challenge: predicting the motion of planets accurately. Johannes Kepler had formulated his famous laws of planetary motion, including the law that planets move in elliptical orbits with the Sun at one focus. However, determining the exact position of a planet at a given time required solving a key equation known as **Kepler's Equation**:
+
+```
+M = E - e * sin(E)
+```
+
+Where:
+
+- **M** is the mean anomaly (a measure of time within the orbital period).
+- **E** is the eccentric anomaly (related to the position of the planet along its orbit).
+- **e** is the orbital eccentricity (a measure of how elliptical the orbit is).
+
+Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. As a result, iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.
+
+![Visualization of Kepler's laws showing an elliptical orbit with the Sun at one focus, along with the geometric relationships for M, E, and e. The Sun is represented as a stationary dot at one focus of the ellipse. The moving planet represents the relationship between its mean anomaly (M), eccentric anomaly (E), and the orbital eccentricity (e).](path-to-your-image.gif)
+
+Without a method to solve such equations efficiently, progress in astronomy and related sciences would have been severely limited. It was in this context that Newton's contributions became revolutionary. By introducing an iterative approach that could refine approximate solutions, Newton offered a practical path to solving equations like Kepler's.
+
+### Newton's Iterative Approach
+
+Newton's method works by refining an initial guess for the eccentric anomaly E through an iterative process. The formula used to solve Kepler's Equation is:
+
+```
+E_(n+1) = E_n - (E_n - e * sin(E_n) - M) / (1 - e * cos(E_n))
+```
+
+This iteration leverages the first derivative of the equation to adjust the guess, leading to rapid convergence for small values of eccentricity e.
+
+This means that starting with an initial estimate for E, the method calculates a new estimate by evaluating how far the current value is from satisfying Kepler’s Equation. By considering the slope of the curve (i.e., the derivative), the process “zooms in” on the solution with each step. This makes it highly efficient for equations with well-behaved derivatives.
+
+### Enhanced Techniques from Modern Applications
+
+In modern times, more sophisticated algorithms, including a second-order Newton-Raphson approach, have been developed to increase precision and efficiency. For example, the NASA Technical Note elaborates on methods used for satellite orbit determination, where an enhanced version of Newton's method incorporates second-order terms to achieve cubic convergence:
+
+```
+E_(n+1) = E_n - (f(E_n) / f'(E_n)) - (1/2) * ((f''(E_n) * (f(E_n) / f'(E_n))^2) / f'(E_n))
+```
+
+Where:
+
+- **f(E)** is the Kepler equation reformulated as f(E) = E - e \* sin(E) - M
+- **f'(E)** and **f''(E)** are the first and second derivatives of f(E)
+
+This second-order correction accelerates convergence and is particularly valuable in high-precision applications such as satellite navigation and space exploration. It demonstrates how Newton’s foundational ideas have evolved to meet the demands of modern science.
+
+To break this down: while the standard Newton-Raphson method adjusts estimates based on the first derivative, the second-order approach incorporates information from the curvature of the function (via the second derivative). This added insight helps the method converge even faster, particularly when very high accuracy is required.
+
+**[Image Placeholder: Graphical representation comparing first-order and second-order Newton-Raphson convergence.]**
+
+This iterative process quickly converged to the true value of E, especially for small eccentricities. The success of this approach in solving Kepler's Equation highlights the importance of root-finding methods and their transformative impact on scientific computation. This historical foundation will guide the exploration of how such techniques extend into multidimensional contexts, addressing the added complexities and opportunities they present.
+
+**[Image Placeholder: Comparison of 1D root-finding visualization and a multidimensional Jacobian matrix representation to hint at upcoming topics.]**
 
 
-## Example
-
-### Problem setup
-
-Consider a chemical reaction system with two species, $A$ and $B$, governed by the following nonlinear equations:
-
-$$
-R_1(C_A, C_B) = 2C_A^2 - 3C_B = 0,
-$$
-
-$$
-R_2(C_A, C_B) = C_B^2 - 4C_A = 0,
-$$
-
-where $C_A$ and $C_B$ are the concentrations of species $A$ and $B$, respectively.
-### Goal
-
-The goal is to find the equilibrium concentrations $(C_A, C_B)$ where both reaction rates are zero. This requires solving the system of equations:
-
-1. $2C_A^2 - 3C_B = 0$
-2. $C_B^2 - 4C_A = 0$
-
-### Why multidimensional methods are needed
-
-- The equations are nonlinear, meaning they cannot be solved algebraically without significant simplifications.
-- The variables $C_A$ and $C_B$ are interdependent, requiring simultaneous solutions.
-
-## Background
 
 
 ## References
