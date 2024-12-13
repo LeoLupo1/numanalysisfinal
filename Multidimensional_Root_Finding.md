@@ -39,7 +39,8 @@ Where:
 
 Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. As a result, iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.
 
-![Visualization of Kepler's laws showing an elliptical orbit with the Sun at one focus, along with the geometric relationships for M, E, and e. The Sun is represented as a stationary dot at one focus of the ellipse. The moving planet represents the relationship between its mean anomaly (M), eccentric anomaly (E), and the orbital eccentricity (e).](images/kepler.gif)
+![Visualization of Kepler's laws showing an elliptical orbit with the Sun at one focus, along with the geometric relationships for M, E, and e. The Sun is represented as a stationary dot at one focus of the ellipse. The moving planet represents the relationship between its mean anomaly (M), eccentric anomaly (E), and the orbital eccentricity (e).](images/kepler2.gif)
+In this visualization, The purple dot represents the planet, the Sun is the big orange one at the focus of the elipse, and the eccentric anomaly (E), is the angle between the semi-marjor axis (the green line) and the line connecting the center of the ellipse to the planet's projection onto the circumscribed circle.
 
 Without a method to solve such equations efficiently, progress in astronomy and related sciences would have been severely limited. It was in this context that Newton's contributions became revolutionary. By introducing an iterative approach that could refine approximate solutions, Newton offered a practical path to solving equations like Kepler's.
 
