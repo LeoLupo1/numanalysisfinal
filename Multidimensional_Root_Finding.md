@@ -99,6 +99,8 @@ $$
 After two iterations, \( E_2 \) is very close to the true value, demonstrating the rapid convergence of Newton's Method for well-behaved equations like Kepler's.
 
 
+![Newton's Method Visualization](images/newton1.gif)
+
 ### Enhanced Techniques from Modern Applications
 
 In modern times, more sophisticated algorithms, including a second-order Newton-Raphson approach, have been developed to increase precision and efficiency. For example, the NASA Technical Note elaborates on methods used for satellite orbit determination, where an enhanced version of Newton's method incorporates second-order terms to achieve cubic convergence:
