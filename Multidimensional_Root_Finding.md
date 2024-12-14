@@ -47,7 +47,7 @@ By introducing an iterative approach that could refine approximate solutions, Ne
 
 ### Newton's Method
 
-Newton's Method is a 1 dimensional root approximating tequenique. That is, it let's you approximate for the value of x where f(x) = 0.
+Newton's Method, also sometimes called the Newton-Raphson Method, is a 1 dimensional root approximating tequenique. That is, it let's you approximate for the value of x where f(x) = 0.
 
 1. Find the tangent line of the function you are trying to approximate at any random point on the function.
 2. Simply find the root of that tangent line.
@@ -84,7 +84,7 @@ $$
 #### Let's say:
 - Mean anomaly \( M = 0.75 \) radians
 - Orbital eccentricity \( e = 0.3 \)
-- Initial guess \( E_0 = 0.75 \) radians
+- Initial guess \( E_0 = 0.75 \) radiansf
 
 #### Iteration Steps:
 
@@ -154,7 +154,7 @@ This iterative process quickly converged to the true value of E, especially for 
 
 ## Strengths and Challenges
 
-Newton's Method is highly effective in certain types of multidimensional problems, particularly when the equations and conditions align well. These are the scenarios where it excels:
+Some of the scenarios where Newton's Method excels:
 
 #### **1. Well-Conditioned Jacobians**
 - Newton's Method performs best when the Jacobian matrix is stable and invertible (not singular or poorly conditioned). A well-behaved Jacobian ensures smooth progression toward the root.
