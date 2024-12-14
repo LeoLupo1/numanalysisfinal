@@ -123,13 +123,14 @@ $$
    E_2 \approx 0.785
    $$
 
-Below is a graphical representation of this process:
-
+Below is a graphical representation running Euler's Method on Kepler's Equations applied at different starting points:
 
 ![Newton's Method Visualization](images/newton2.gif)
 
+Where the black line is Kepler's Equation, $f(E) = E - esin(E) - M$, the red line is the tangent at the point tested.
+The black vertical dotted line represents the actual root of Kepler's function, the green vertical line is E1, the blue is is E2, and the red one if you can see it is E3.
 
-The black vertical dotted line represents the actual root of Kepler's function in this example
+After running Euler's Method 3 on Kepler's Equations 3 times, to get E3, it very consistantly is very close to the actual root.
 
 ### Enhanced Techniques from Modern Applications
 
