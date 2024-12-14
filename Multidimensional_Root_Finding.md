@@ -8,7 +8,7 @@ Title: Challenges and Methods in Multidimensional Root Finding
 - [Introduction](#introduction)
 - [Hisorical Significance](#historical-significance)
 - [Strengths and Challenges of Euler's Method](#strengths-and-challenges)
-- [Broyden's Method](#broyden's-method)
+- [Broyden's Method](#broydens-method)
 - [Conclusion](#conclusion)
 - [Pseudocode](#pseudocode)
 - [References](#references)
@@ -198,14 +198,12 @@ Broyden’s Method addresses some of these limitations by approximating the Jaco
 3. **Scalability**
    - Broyden’s Method scales better for high-dimensional problems, where recalculating and inverting a large Jacobian matrix at each step would be computationally prohibitive.
 
----
+## Broydens Method
 
-### Next Steps
-
-In the following section, we’ll explore Broyden’s Method in detail. This will include its algorithm, practical implementation, and examples of its application to multidimensional systems. By comparing it to Newton’s Method, we’ll highlight its strengths and limitations in real-world contexts.
 
 ## Pseudocode
 ```text
+Code used to generate GIF of Newton's Method used in 3D
 1. Define functions:
    - Create function `f(x, y)` for the first equation.
    - Create function `g(x, y)` for the second equation.
@@ -240,9 +238,7 @@ In the following section, we’ll explore Broyden’s Method in detail. This wil
      - Update the plot to show progress.
    - Save the animation as a GIF.
 
-7. Download the GIF (optional):
-   - Export the GIF file.
-   - Trigger a download to the user’s device.
+7. Download the GIF
 ```
 
 
