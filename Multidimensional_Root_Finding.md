@@ -14,14 +14,13 @@ Title: Challenges and Methods in Multidimensional Root Finding
 - [Pseudocode](#pseudocode)
 - [References](#references)
 
-
 # Multidimensional Methods for Root Finding
 
 ## Introduction
 
 This article explores multidimensional root-finding methods, providing an overview of how a few key approaches work, their unique characteristics, and the factors that make solving these problems more complex than their one-dimensional counterparts.
 
-Many Graphics used in this Project were made in GIFsmos, here is a link to the project files used.
+Many of the GIFS used in this Project were made in GIFsmos, here is a link to the project files used.
 
 ## Historical Significance
 
@@ -37,7 +36,7 @@ Where:
 - **E** is the eccentric anomaly (related to the position of the planet along its orbit).
 - **e** is the orbital eccentricity (a measure of how elliptical the orbit is).
 
-Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. This means that iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.
+Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. This means that iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.[1]
 
 ![Visualization of Kepler's laws showing an elliptical orbit with the Sun at one focus, along with the geometric relationships for M, E, and e. The Sun is represented as a stationary dot at one focus of the ellipse. The moving planet represents the relationship between its mean anomaly (M), eccentric anomaly (E), and the orbital eccentricity (e).](images/kepler2.gif)
 
@@ -61,9 +60,9 @@ The formula predicts the root $x_{n+1}$ by subtracting the last root predicted, 
 
 4. Plug that new value back into the function and repeat until satisfied.
 
-We can approximate the solution to Kepler's Equation using this method:
+### Approximating the solution to Kepler's Equation using Newton's Method:
 
-Start with the formula from earlier:
+Start with Kepler's Equation from earlier:
 
 $$
 M = E - esin(E)
@@ -133,24 +132,74 @@ The black vertical dotted line represents the actual root of Kepler's function, 
 
 After running Euler's Method 3 on Kepler's Equations 3 times, yeilding E3, it very consistantly is very close to the actual root.
 
-### Enhanced Techniques from Modern Applications
 
-In modern times, more sophisticated algorithms, including a second-order Newton-Raphson approach, have been developed to increase precision and efficiency. For example, the NASA Technical Note elaborates on methods used for satellite orbit determination, where an enhanced version of Newton's method incorporates second-order terms to achieve cubic convergence:
+### Newton’s Method in Two Dimensions
 
-![Equation](https://latex.codecogs.com/gif.latex?E_{n%2B1}%20=%20E_n%20-%20\frac{f(E_n)}{f'(E_n)}%20-%20\frac{1}{2}%20\cdot%20\frac{f''(E_n)%20\cdot%20\left(\frac{f(E_n)}{f'(E_n)}\right)^2}{f'(E_n)})
+After approximating Kepler's Equation in one dimension, we now extend the concept of Newton's Method to handle multidimensional root-finding problems. This leap is crucial for solving complex systems of equations that arise in engineering, physics, and mathematics, where variables are interdependent, and analytical solutions are rarely possible.
 
-Where:
+#### **Why Use Newton's Method for Multidimensional Problems?**
 
-- **f(E)** is the Kepler equation reformulated as f(E) = E - e \* sin(E) - M
-- **f'(E)** and **f''(E)** are the first and second derivatives of f(E)
+In one dimension, Newton's Method adjusts guesses for a root based on the slope of the function at a given point. In two (or more) dimensions, we generalize this idea to a system of equations. Instead of dealing with a single derivative, we now work with a matrix of partial derivatives—the Jacobian matrix—which captures how each function in the system depends on each variable.
 
-This second-order correction accelerates convergence and is particularly valuable in high-precision applications such as satellite navigation and space exploration. It demonstrates how Newton’s foundational ideas have evolved to meet the demands of modern science.
+This approach enables us to iteratively approximate the solution to a system of nonlinear equations:
 
-To break this down: while the standard Newton-Raphson method adjusts estimates based on the first derivative, the second-order approach incorporates information from the curvature of the function (via the second derivative). This added insight helps the method converge even faster, particularly when very high accuracy is required.
+![Equation](https://latex.codecogs.com/gif.latex?f_1(x,y)%20%3D%200%2C%20f_2(x,y)%20%3D%200)
 
-**[Image Placeholder: Graphical representation comparing first-order and second-order Newton-Raphson convergence.]**
+By refining guesses, Newton’s Method provides a fast and reliable way to find where these equations intersect.
 
-This iterative process quickly converged to the true value of E, especially for small eccentricities. The success of this approach in solving Kepler's Equation highlights the importance of root-finding methods and their transformative impact on scientific computation. This historical foundation will guide the exploration of how such techniques extend into multidimensional contexts, addressing the added complexities and opportunities they present.
+#### **The System of Equations: A Circle and a Parabola**
+
+For this example, we solve a simple yet illustrative system of equations:
+
+![Equation](https://latex.codecogs.com/gif.latex?f_1(x%2C%20y)%20%3D%20x%5E2%20%2B%20y%5E2%20-%201%2C%20f_2(x%2C%20y)%20%3D%20x%20-%20y%5E2)
+
+These equations represent a circle of radius 1 and a parabola, and our goal is to find their intersection points in the \(x\)-\(y\) plane.
+
+#### **The 2D Newton's Method Formula**
+
+Newton's Method in two dimensions updates the current guess:
+
+![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_%7Bn%2B1%7D%20%3D%20%5Cmathbf%7Bx%7D_n%20-%20%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D_n)^{-1}%20%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_n))
+
+where:
+
+- ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D)%20%3D%20%5Bf_1(x%2C%20y)%2C%20f_2(x%2C%20y)%5D%5ET),
+- ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D)) is the Jacobian matrix:
+  ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D)%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Cfrac%7B%5Cpartial%20f_1%7D%7B%5Cpartial%20x%7D%20%26%20%5Cfrac%7B%5Cpartial%20f_1%7D%7B%5Cpartial%20y%7D%20%5C%5C%20%5Cfrac%7B%5Cpartial%20f_2%7D%7B%5Cpartial%20x%7D%20%26%20%5Cfrac%7B%5Cpartial%20f_2%7D%7B%5Cpartial%20y%7D%20%5Cend%7Bbmatrix%7D)
+
+For our system:
+
+![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(x%2C%20y)%20%3D%20%5Cbegin%7Bbmatrix%7D%202x%20%26%202y%20%5C%5C%201%20%26%20-2y%20%5Cend%7Bbmatrix%7D)
+
+#### **Step-by-Step Example**
+
+Let’s start with an initial guess:
+
+![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_0%20%3D%20%5B0.5%2C%200.5%5D%5ET)
+
+1. **Iteration 1:**
+   ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_0)%20%3D%20%5Cbegin%7Bbmatrix%7D%20(0.5)%5E2%20%2B%20(0.5)%5E2%20-%201%20%5C%5C%200.5%20-%20(0.5)%5E2%20%5Cend%7Bbmatrix%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-0.5%20%5C%5C%200.25%20%5Cend%7Bbmatrix%7D)
+
+   ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D_0)%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%20-1%20%5Cend%7Bbmatrix%7D)
+
+   Solve:
+   ![Equation](https://latex.codecogs.com/gif.latex?%5CDelta%20%5Cmathbf%7Bx%7D_0%20%3D%20%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D_0)^{-1}%20%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_0))
+
+   Update:
+   ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_1%20%3D%20%5Cmathbf%7Bx%7D_0%20-%20%5CDelta%20%5Cmathbf%7Bx%7D_0)
+
+#### **Visualizing the Process**
+
+To illustrate, we generate a 3D visualization. While the problem is inherently 2D, the functions are plotted as surfaces in 3D space:
+
+- $$z = f_1(x, y)$$,
+- $$z = f_2(x, y)$$.
+
+The intersection curve represents the solutions.
+
+![GIF Here: Iterative points converge on the intersection curve of the two surfaces.]
+
+
 
 ## Strengths and Challenges
 
@@ -190,9 +239,7 @@ Broyden’s Method addresses some of these limitations by approximating the Jaco
 1. **Jacobian Approximation**
    - Broyden's Method begins with an initial solution guess \( \mathbf{x}_0 \) and an approximate Jacobian matrix \( \mathbf{B}_0 \), often initialized as the identity matrix:
 
-     $$
-     \mathbf{B}_0 = \mathbf{I}
-     $$
+     ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BB%7D_0%20%3D%20%5Cmathbf%7BI%7D)
 
    - The method avoids recalculating the Jacobian matrix by updating the approximation iteratively using information from previous steps.
 
@@ -200,35 +247,25 @@ Broyden’s Method addresses some of these limitations by approximating the Jaco
    - At each iteration \( n \):
      - Solve the linear system:
 
-       $$
-       \mathbf{B}_n \Delta \mathbf{x}_n = -\mathbf{F}(\mathbf{x}_n)
-       $$
+       ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BB%7D_n%20%5CDelta%20%5Cmathbf%7Bx%7D_n%20%3D%20-%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_n))
 
        to compute the update step \( \Delta \mathbf{x}_n \).
      - Update the solution:
 
-       $$
-       \mathbf{x}_{n+1} = \mathbf{x}_n + \Delta \mathbf{x}_n
-       $$
+       ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_%7Bn%2B1%7D%20%3D%20%5Cmathbf%7Bx%7D_n%20%2B%20%5CDelta%20%5Cmathbf%7Bx%7D_n)
 
      - Evaluate the function at the new solution:
 
-       $$
-       \Delta \mathbf{F}_n = \mathbf{F}(\mathbf{x}_{n+1}) - \mathbf{F}(\mathbf{x}_n)
-       $$
+       ![Equation](https://latex.codecogs.com/gif.latex?%5CDelta%20%5Cmathbf%7BF%7D_n%20%3D%20%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_%7Bn%2B1%7D)%20-%20%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_n))
 
      - Adjust the Jacobian approximation using the rank-one update formula:
 
-       $$
-       \mathbf{B}_{n+1} = \mathbf{B}_n + \frac{(\Delta \mathbf{F}_n - \mathbf{B}_n \Delta \mathbf{x}_n) \Delta \mathbf{x}_n^T}{\| \Delta \mathbf{x}_n \|^2}
-       $$
+       ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BB%7D_%7Bn%2B1%7D%20%3D%20%5Cmathbf%7BB%7D_n%20%2B%20%5Cfrac%7B(%5CDelta%20%5Cmathbf%7BF%7D_n%20-%20%5Cmathbf%7BB%7D_n%20%5CDelta%20%5Cmathbf%7Bx%7D_n)%20%5CDelta%20%5Cmathbf%7Bx%7D_n%5ET%7D%7B%5C%7C%20%5CDelta%20%5Cmathbf%7Bx%7D_n%20%5C%7C%5E2%7D)
 
 3. **Convergence**
    - Repeat the iterative process until convergence criteria are met, such as:
 
-     $$
-     \| \mathbf{F}(\mathbf{x}_n) \| < \text{tolerance} \quad \text{or} \quad \| \Delta \mathbf{x}_n \| < \text{tolerance}.
-     $$
+     ![Equation](https://latex.codecogs.com/gif.latex?%5C%7C%20%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_n)%20%5C%7C%20%3C%20%5Ctext%7Btolerance%7D%20%5Cquad%20%5Ctext%7Bor%7D%20%5Cquad%20%5C%7C%20%5CDelta%20%5Cmathbf%7Bx%7D_n%20%5C%7C%20%3C%20%5Ctext%7Btolerance%7D)
 
 #### **Key Advantages of Broyden's Method**
 
@@ -315,6 +352,10 @@ Code used to generate GIF of Newton's Method used in 3D
 ```
 
 ## References
-1.<a id="ref1"></a>3.4 Broyden’s method. Washington University in St. Louis Engineering. (n.d.). https://classes.engineering.wustl.edu/2010/spring/ese415/ch3-4.pdf 
-2.<a id="ref1"></a> Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Chapter 9: Root finding and nonlinear sets of equations. In *Numerical recipes: The art of scientific computing* (3rd ed.). New York: Cambridge University Press. ISBN 978-0-521-88068-8.
-3.<a id="ref1"></a>Daekin, R. E. (2017, December). Solutions of Kepler’s equation. http://www.mygeodesy.id.au/documents/Solutions%20of%20Keplers%20Equation.pdf 
+1.<a id="ref1"></a> Daekin, R. E. (2017, December). Solutions of Kepler’s equation. http://www.mygeodesy.id.au/documents/Solutions%20of%20Keplers%20Equation.pdf
+
+2.<a id="ref2"></a> Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Chapter 9: Root finding and nonlinear sets of equations. In *Numerical recipes: The art of scientific computing* (3rd ed.). New York: Cambridge University Press. ISBN 978-0-521-88068-8.
+
+3.<a id="ref3"></a> Kohout, J. M., & Layton, L. (n.d.). Optimized solution of Kepler’s equation. https://ntrs.nasa.gov/api/citations/19720016564/downloads/19720016564.pdf 
+
+4.<a id="ref4"></a>3.4 Broyden’s method. Washington University in St. Louis Engineering. (n.d.). https://classes.engineering.wustl.edu/2010/spring/ese415/ch3-4.pdf
