@@ -26,9 +26,9 @@ All Graphics used in this Project were made in Desmos, here is a link to the pro
 
 During the late 17th century, astronomers faced a pressing challenge: predicting the motion of planets accurately. Johannes Kepler had formulated his famous laws of planetary motion, including the law that planets move in elliptical orbits with the Sun at one focus. However, determining the exact position of a planet at a given time required solving a key equation known as **Kepler's Equation**:
 
-```
+$$
 M = E - esin(E)
-```
+$$
 
 Where:
 
@@ -49,17 +49,32 @@ Without a method to solve such equations efficiently, progress in astronomy and 
 Newton's Method is a 1 dimensional root approximating tequenique. That is, it let's you approximate for the value of x where f(x) = 0.
 
 1. Find the tangent line of the function you are trying to approximate at any random point on the function.
-2. simply find the root of that tangent line.
-3. plug it into this function:
+2. Simply find the root of that tangent line.
+3. Plug it into this function:
 
 $$
 x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
 $$
 
+The formula predicts the root $x_{n+1}$ by subtracting the last root predicted, in this case the x-intercept of the tangent line, by the value of the function at that point over the derivative of the function at that point.
 
+4. Plug that new value back into the function and repeat until satisfied.
 
+We can approximate the solution to Kepler's Equation using this method:
 
-Kepler's Equation can be solved using the following iterative formula derived from Newton's Method:
+Start with the formula from earlier:
+
+$$
+M = E - esin(E)
+$$
+
+and rearrange it so that we are solving for the root:
+
+$$
+0 = E - esin(E) - M
+$$
+
+Now, if we make that the function $f(x_n)$ and plug it into Newton's method:
 
 $$
 E_{n+1} = E_n - \frac{E_n - e \sin(E_n) - M}{1 - e \cos(E_n)}
@@ -108,11 +123,13 @@ $$
    E_2 \approx 0.785
    $$
 
-#### Convergence:
-After two iterations, \( E_2 \) is very close to the true value, demonstrating the rapid convergence of Newton's Method for well-behaved equations like Kepler's.
+Below is a graphical representation of this process:
 
 
 ![Newton's Method Visualization](images/newton1.gif)
+
+
+The black vertical dotted line represents the root of Kepler's function in this example
 
 ### Enhanced Techniques from Modern Applications
 
