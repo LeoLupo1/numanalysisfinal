@@ -311,7 +311,7 @@ $$
 \mathbf{x}_7 = \begin{bmatrix} 0.6180339887498948 \\ 0.7861513777598889 \end{bmatrix}
 $$
 
-![3D Newton's Method Visualization](images/3d.gif)
+![3D Newton's Method Visualization](images/newtons3.gif)
 
 Based on the results and the visualization above, there are some interesting things we can learn about Newton's method for Multivariable root finding.
 Firstly, notice that the first point entered, (0.2,0.2), was closer to the actual root solution than the first iteration guess, (0.742,1.957)
