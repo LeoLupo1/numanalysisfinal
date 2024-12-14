@@ -9,6 +9,7 @@ Title: Challenges and Methods in Multidimensional Root Finding
 - [Hisorical Significance](#historical-significance)
 - [Strengths and Challenges of Euler's Method](#strengths-and-challenges)
 - [Broyden's Method](#broydens-method)
+- [Edge Cases](#edge-cases)
 - [Conclusion](#conclusion)
 - [Pseudocode](#pseudocode)
 - [References](#references)
@@ -20,7 +21,7 @@ Title: Challenges and Methods in Multidimensional Root Finding
 
 This article explores multidimensional root-finding methods, providing an overview of how a few key approaches work, their unique characteristics, and the factors that make solving these problems more complex than their one-dimensional counterparts.
 
-All Graphics used in this Project were made in GIFsmos, here is a link to the project files used.
+Many Graphics used in this Project were made in GIFsmos, here is a link to the project files used.
 
 ## Historical Significance
 
@@ -36,13 +37,13 @@ Where:
 - **E** is the eccentric anomaly (related to the position of the planet along its orbit).
 - **e** is the orbital eccentricity (a measure of how elliptical the orbit is).
 
-Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. As a result, iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.
+Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. This means that iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.
 
 ![Visualization of Kepler's laws showing an elliptical orbit with the Sun at one focus, along with the geometric relationships for M, E, and e. The Sun is represented as a stationary dot at one focus of the ellipse. The moving planet represents the relationship between its mean anomaly (M), eccentric anomaly (E), and the orbital eccentricity (e).](images/kepler2.gif)
 
 In this visualization, The purple dot represents the planet, the Sun is the big orange one at the focus of the elipse, and the eccentric anomaly (E), is the angle between the semi-marjor axis (the green line) and the line connecting the center of the ellipse to the planet's projection onto the circumscribed circle.
 
-Without a method to solve such equations efficiently, progress in astronomy and related sciences would have been severely limited. It was in this context that Newton's contributions became revolutionary. By introducing an iterative approach that could refine approximate solutions, Newton offered a "method" to solving equations like Kepler's. Some may even call it Newton's Method perhaps.
+By introducing an iterative approach that could refine approximate solutions, Newton offered a "method" to solving equations like Kepler's. Some may even call it Newton's Method perhaps.
 
 ### Newton's Method
 
@@ -167,8 +168,6 @@ Newton's Method is highly effective in certain types of multidimensional problem
 - When the starting point is near the actual root, Newton's Method converges quadratically, meaning the number of correct digits doubles with each iteration.
 - **Example:** Solving design optimization problems where a good initial guess is available from prior analysis or simulation.
 
----
-
 ### Failures of Newton's Method
 
 While powerful, Newton's Method has limitations that can prevent it from working effectively in some cases:
@@ -181,24 +180,98 @@ While powerful, Newton's Method has limitations that can prevent it from working
 - If the Jacobian matrix is singular or nearly singular, the method fails because the matrix cannot be reliably inverted.
 - **Example:** Systems with strongly interdependent variables or nearly parallel constraints can cause numerical instability.
 
----
-
 ### Introducing Broyden's Method
 
 Broyden’s Method addresses some of these limitations by approximating the Jacobian matrix rather than recalculating and inverting it at each iteration. This makes it more robust and computationally efficient in challenging scenarios.
 
+## Broydens Method
+#### **How Broyden's Method Works**
+
+1. **Jacobian Approximation**
+   - Broyden's Method begins with an initial solution guess \( \mathbf{x}_0 \) and an approximate Jacobian matrix \( \mathbf{B}_0 \), often initialized as the identity matrix:
+
+     $$
+     \mathbf{B}_0 = \mathbf{I}
+     $$
+
+   - The method avoids recalculating the Jacobian matrix by updating the approximation iteratively using information from previous steps.
+
+2. **Iterative Updates**
+   - At each iteration \( n \):
+     - Solve the linear system:
+
+       $$
+       \mathbf{B}_n \Delta \mathbf{x}_n = -\mathbf{F}(\mathbf{x}_n)
+       $$
+
+       to compute the update step \( \Delta \mathbf{x}_n \).
+     - Update the solution:
+
+       $$
+       \mathbf{x}_{n+1} = \mathbf{x}_n + \Delta \mathbf{x}_n
+       $$
+
+     - Evaluate the function at the new solution:
+
+       $$
+       \Delta \mathbf{F}_n = \mathbf{F}(\mathbf{x}_{n+1}) - \mathbf{F}(\mathbf{x}_n)
+       $$
+
+     - Adjust the Jacobian approximation using the rank-one update formula:
+
+       $$
+       \mathbf{B}_{n+1} = \mathbf{B}_n + \frac{(\Delta \mathbf{F}_n - \mathbf{B}_n \Delta \mathbf{x}_n) \Delta \mathbf{x}_n^T}{\| \Delta \mathbf{x}_n \|^2}
+       $$
+
+3. **Convergence**
+   - Repeat the iterative process until convergence criteria are met, such as:
+
+     $$
+     \| \mathbf{F}(\mathbf{x}_n) \| < \text{tolerance} \quad \text{or} \quad \| \Delta \mathbf{x}_n \| < \text{tolerance}.
+     $$
+
 #### **Key Advantages of Broyden's Method**
 
 1. **Efficient Jacobian Updates**
-   - Instead of recalculating the Jacobian, Broyden’s Method updates an approximation using previous iterations. This reduces computational cost and avoids repeated matrix inversions.
+   - By approximating the Jacobian instead of recalculating it, Broyden’s Method avoids the computational cost of explicit Jacobian evaluation and inversion.
 
 2. **Robustness in Singular Scenarios**
-   - By sidestepping direct Jacobian inversion, the method can continue iterating even when the true Jacobian is singular or poorly conditioned.
+   - Broyden’s Method can handle cases where the Jacobian is singular or ill-conditioned, enabling the iterative process to continue even when Newton’s Method would fail.
 
 3. **Scalability**
-   - Broyden’s Method scales better for high-dimensional problems, where recalculating and inverting a large Jacobian matrix at each step would be computationally prohibitive.
+   - It scales better for high-dimensional problems where recalculating and inverting a full Jacobian matrix would be computationally prohibitive. Limited-memory variants further enhance its utility in large systems.
 
-## Broydens Method
+#### **Best Use Cases**
+
+- **Large Nonlinear Systems:** Effective for solving high-dimensional problems where explicit Jacobian computations are too costly.
+- **Poorly Conditioned Problems:** Performs well in cases where the Jacobian matrix is nearly singular or ill-conditioned.
+- **Optimization Problems:** Useful for scenarios with many variables and nonlinear constraints, such as physical simulations or machine learning applications.
+
+#### **Edge Cases in Broyden's Method**
+
+1. **Sparse Jacobian Matrices**
+   - When the Jacobian matrix is sparse (mostly zeros), directly updating and storing the full approximation \( \mathbf{B}_n \) can be inefficient.
+   - **Solution:** Use sparse matrix storage formats and operations to reduce memory and computational costs.
+
+2. **Banded Jacobian Matrices**
+   - For banded Jacobians, where nonzero elements are clustered near the diagonal, standard updates waste resources on zero elements.
+   - **Solution:** Adapt the update step to preserve and operate only on the banded structure of the Jacobian.
+
+3. **Slow Convergence in Ill-Conditioned Systems**
+   - In systems with poor initial guesses or nearly singular Jacobians, the approximation \( \mathbf{B}_n \) may degrade, leading to slow progress.
+   - **Solution:** Introduce damping factors to stabilize updates or restart with a fresh approximation when necessary.
+
+4. **High-Dimensional Problems**
+   - In systems with a large number of variables, maintaining and updating \( \mathbf{B}_n \) becomes computationally expensive.
+   - **Solution:** Use limited-memory variants, such as L-BFGS, to approximate only a portion of the Jacobian, focusing on the most critical directions.
+
+5. **Highly Nonlinear Systems**
+   - When the system of equations is highly nonlinear, the rank-one update may fail to capture the behavior accurately, causing divergence.
+   - **Solution:** Combine Broyden’s Method with line search techniques to control step sizes and ensure stability.
+
+6. **Discontinuous Functions**
+   - For functions with discontinuities, Broyden’s Method may struggle as the Jacobian approximation fails to account for abrupt changes.
+   - **Solution:** Switch to global methods or hybrid approaches that combine Broyden’s Method with robustness-focused strategies like trust-region methods.
 
 
 ## Pseudocode
@@ -240,11 +313,6 @@ Code used to generate GIF of Newton's Method used in 3D
 
 7. Download the GIF
 ```
-
-
-**[Image Placeholder: Comparison of 1D root-finding visualization and a multidimensional Jacobian matrix representation to hint at upcoming topics.]**
-
-I'd highly recommend reading the paper yourself, they explain it quite better than I could.
 
 ## References
 
