@@ -135,21 +135,11 @@ After running Euler's Method 3 on Kepler's Equations 3 times, yeilding E3, it ve
 
 ### Newton’s Method in Two Dimensions
 
-After approximating Kepler's Equation in one dimension, we now extend the concept of Newton's Method to handle multidimensional root-finding problems. This leap is crucial for solving complex systems of equations that arise in engineering, physics, and mathematics, where variables are interdependent, and analytical solutions are rarely possible.
-
-#### **Why Use Newton's Method for Multidimensional Problems?**
-
-In one dimension, Newton's Method adjusts guesses for a root based on the slope of the function at a given point. In two (or more) dimensions, we generalize this idea to a system of equations. Instead of dealing with a single derivative, we now work with a matrix of partial derivatives—the Jacobian matrix—which captures how each function in the system depends on each variable.
+In one dimension, Newton's Method adjusts guesses for a root based on the slope of the function at a given point. In two (or more) dimensions, we generalize this idea to a system of equations. Instead of dealing with a single derivative, we now work with a matrix of partial derivatives, the Jacobian matrix, which captures how each function in the system depends on each variable.
 
 This approach enables us to iteratively approximate the solution to a system of nonlinear equations:
 
-![Equation](https://latex.codecogs.com/gif.latex?f_1(x,y)%20%3D%200%2C%20f_2(x,y)%20%3D%200)
-
-By refining guesses, Newton’s Method provides a fast and reliable way to find where these equations intersect.
-
-#### **The System of Equations: A Circle and a Parabola**
-
-For this example, we solve a simple yet illustrative system of equations:
+#### **Example: Circle and Parabola**
 
 ![Equation](https://latex.codecogs.com/gif.latex?f_1(x%2C%20y)%20%3D%20x%5E2%20%2B%20y%5E2%20-%201%2C%20f_2(x%2C%20y)%20%3D%20x%20-%20y%5E2)
 
@@ -177,7 +167,8 @@ Let’s start with an initial guess:
 
 ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_0%20%3D%20%5B0.5%2C%200.5%5D%5ET)
 
-1. **Iteration 1:**
+**Iteration 1:**
+
    ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_0)%20%3D%20%5Cbegin%7Bbmatrix%7D%20(0.5)%5E2%20%2B%20(0.5)%5E2%20-%201%20%5C%5C%200.5%20-%20(0.5)%5E2%20%5Cend%7Bbmatrix%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-0.5%20%5C%5C%200.25%20%5Cend%7Bbmatrix%7D)
 
    ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D_0)%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%20-1%20%5Cend%7Bbmatrix%7D)
