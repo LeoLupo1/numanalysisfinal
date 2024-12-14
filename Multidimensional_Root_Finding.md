@@ -314,11 +314,14 @@ $$
 ![3D Newton's Method Visualization](images/newtons3.gif)
 
 Based on the results and the visualization above, there are some interesting things we can learn about Newton's method for Multivariable root finding.
-Firstly, notice that the first point entered, (0.2,0.2), was closer to the actual root solution than the first iteration guess, (0.742,1.957)
+Firstly, notice that the first point entered, (0.2,0.2), was closer to the actual root solution than the first iteration guess, (0.742,1.957).
+This is a common multidimensional root finding phenomenon referred to as overshooting and occurs when the initial starting point wasn't chosen well.
+Also notice that once again, around iteration 3, it pretty much found a root solution already, and the next few iterations resulted in about the same point.
+Newton's method is often regarded as a faster yet less reliable than many other root finding algorithms like gradient descent for example.
 
 ## Strengths and Challenges
 
-Some of the scenarios where Newton's Method excels:
+As was just said, Newton's Method is often regarded as a rapidly converging root finder.
 
 #### **1. Well-Conditioned Jacobians**
 - Newton's Method performs best when the Jacobian matrix is stable and invertible (not singular or poorly conditioned). A well-behaved Jacobian ensures smooth progression toward the root.
@@ -328,10 +331,6 @@ Some of the scenarios where Newton's Method excels:
 - The method thrives on functions that are continuously differentiable and exhibit locally quadratic behavior near the root.
 - **Example:** Optimization problems in physics or engineering where gradients are predictable and regular, such as energy minimization in a mechanical system.
 
-#### **3. Close Initial Guesses**
-- When the starting point is near the actual root, Newton's Method converges quadratically, meaning the number of correct digits doubles with each iteration.
-- **Example:** Solving design optimization problems where a good initial guess is available from prior analysis or simulation.
-
 ### Failures of Newton's Method
 
 While powerful, Newton's Method has limitations that can prevent it from working effectively in some cases:
@@ -340,7 +339,7 @@ While powerful, Newton's Method has limitations that can prevent it from working
 - The method is highly sensitive to the starting point. A guess far from the root can lead to divergence or convergence to the wrong solution.
 - **Example:** Functions with multiple roots or saddle points can mislead the method, causing oscillations or divergence.
 
-#### **2. Singular or Ill-Conditioned Jacobians**
+#### **2. Singular Jacobians**
 - If the Jacobian matrix is singular or nearly singular, the method fails because the matrix cannot be reliably inverted.
 - **Example:** Systems with strongly interdependent variables or nearly parallel constraints can cause numerical instability.
 
@@ -392,39 +391,19 @@ Broyden’s Method addresses some of these limitations by approximating the Jaco
 
 3. **Scalability**
    - It scales better for high-dimensional problems where recalculating and inverting a full Jacobian matrix would be computationally prohibitive. Limited-memory variants further enhance its utility in large systems.
+  
+#### **Edge Cases**
 
-#### **Best Use Cases**
+Even though Broyden's method generally makes up for where Newton's Method lacks, like singular jacobians, there are still some edge cases for both:
 
-- **Large Nonlinear Systems:** Effective for solving high-dimensional problems where explicit Jacobian computations are too costly.
-- **Poorly Conditioned Problems:** Performs well in cases where the Jacobian matrix is nearly singular or ill-conditioned.
-- **Optimization Problems:** Useful for scenarios with many variables and nonlinear constraints, such as physical simulations or machine learning applications.
-
-#### **Edge Cases in Broyden's Method**
-
-1. **Sparse Jacobian Matrices**
-   - When the Jacobian matrix is sparse (mostly zeros), directly updating and storing the full approximation \( \mathbf{B}_n \) can be inefficient.
-   - **Solution:** Use sparse matrix storage formats and operations to reduce memory and computational costs.
-
-2. **Banded Jacobian Matrices**
+1. **Banded Jacobian Matrices**
    - For banded Jacobians, where nonzero elements are clustered near the diagonal, standard updates waste resources on zero elements.
-   - **Solution:** Adapt the update step to preserve and operate only on the banded structure of the Jacobian.
 
-3. **Slow Convergence in Ill-Conditioned Systems**
-   - In systems with poor initial guesses or nearly singular Jacobians, the approximation \( \mathbf{B}_n \) may degrade, leading to slow progress.
-   - **Solution:** Introduce damping factors to stabilize updates or restart with a fresh approximation when necessary.
-
-4. **High-Dimensional Problems**
-   - In systems with a large number of variables, maintaining and updating \( \mathbf{B}_n \) becomes computationally expensive.
-   - **Solution:** Use limited-memory variants, such as L-BFGS, to approximate only a portion of the Jacobian, focusing on the most critical directions.
-
-5. **Highly Nonlinear Systems**
+2. **Highly Nonlinear Systems**
    - When the system of equations is highly nonlinear, the rank-one update may fail to capture the behavior accurately, causing divergence.
-   - **Solution:** Combine Broyden’s Method with line search techniques to control step sizes and ensure stability.
-
-6. **Discontinuous Functions**
+   
+3. **Discontinuous Functions**
    - For functions with discontinuities, Broyden’s Method may struggle as the Jacobian approximation fails to account for abrupt changes.
-   - **Solution:** Switch to global methods or hybrid approaches that combine Broyden’s Method with robustness-focused strategies like trust-region methods.
-
 
 ## Pseudocode
 ```text
@@ -473,4 +452,4 @@ Code used to generate GIF of Newton's Method used in 3D
 
 3.<a id="ref3"></a> Kohout, J. M., & Layton, L. (n.d.). Optimized solution of Kepler’s equation. https://ntrs.nasa.gov/api/citations/19720016564/downloads/19720016564.pdf 
 
-4.<a id="ref4"></a>3.4 Broyden’s method. Washington University in St. Louis Engineering. (n.d.). https://classes.engineering.wustl.edu/2010/spring/ese415/ch3-4.pdf
+4.<a id="ref4"></a> 3.4 Broyden’s method. Washington University in St. Louis Engineering. (n.d.). https://classes.engineering.wustl.edu/2010/spring/ese415/ch3-4.pdf
