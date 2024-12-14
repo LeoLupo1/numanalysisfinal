@@ -7,9 +7,10 @@ Title: Challenges and Methods in Multidimensional Root Finding
 # Table of Contents
 - [Introduction](#introduction)
 - [Hisorical Significance](#historical-significance)
-- [Strengths and Challenges of Euler's Method](#strengths-and-challenges-of-euler's-method)
-- [Applications](#applications)
+- [Strengths and Challenges of Euler's Method](#strengths-and-challenges)
+- [Broyden's Method](#broyden's-method)
 - [Conclusion](#conclusion)
+- [Pseudocode](#pseudocode)
 - [References](#references)
 
 
@@ -150,7 +151,7 @@ To break this down: while the standard Newton-Raphson method adjusts estimates b
 
 This iterative process quickly converged to the true value of E, especially for small eccentricities. The success of this approach in solving Kepler's Equation highlights the importance of root-finding methods and their transformative impact on scientific computation. This historical foundation will guide the exploration of how such techniques extend into multidimensional contexts, addressing the added complexities and opportunities they present.
 
-# Strengths and challenges of Newton's Method
+## Strengths and Challenges
 
 Newton's Method is highly effective in certain types of multidimensional problems, particularly when the equations and conditions align well. These are the scenarios where it excels:
 
@@ -203,6 +204,46 @@ Broyden’s Method addresses some of these limitations by approximating the Jaco
 
 In the following section, we’ll explore Broyden’s Method in detail. This will include its algorithm, practical implementation, and examples of its application to multidimensional systems. By comparing it to Newton’s Method, we’ll highlight its strengths and limitations in real-world contexts.
 
+## Pseudocode
+```text
+1. Define functions:
+   - Create function `f(x, y)` for the first equation.
+   - Create function `g(x, y)` for the second equation.
+
+2. Define Jacobian Matrix:
+   - Write a function to calculate the Jacobian matrix `J(x, y)` using partial derivatives of `f` and `g`.
+
+3. Implement Newton's Method:
+   - Input: Initial guess `(x0, y0)`, maximum iterations, and tolerance.
+   - Loop through iterations:
+     - Evaluate the Jacobian matrix at the current guess.
+     - Compute the function values `f(x, y)` and `g(x, y)`.
+     - Solve for the update step using `J^-1 * F`.
+     - Update the guess `(x, y)`.
+     - Check for convergence by comparing the step size to the tolerance.
+     - Save the current point to the list of iterations.
+   - Output: List of points representing iterative guesses.
+
+4. Generate a grid for visualization:
+   - Create a meshgrid of `x` and `y` values.
+   - Compute `z` values for `f(x, y)` and `g(x, y)` to represent surfaces.
+
+5. Plot in 3D:
+   - Initialize a 3D plot.
+   - Add the surfaces `z1 = f(x, y)` and `z2 = g(x, y)`.
+   - Add iterative points as markers projected onto the `x-y` plane.
+
+6. Create an animation:
+   - Loop through frames:
+     - Gradually reveal iterative points based on frame count.
+     - Rotate the 3D view slightly for each frame.
+     - Update the plot to show progress.
+   - Save the animation as a GIF.
+
+7. Download the GIF (optional):
+   - Export the GIF file.
+   - Trigger a download to the user’s device.
+```
 
 
 **[Image Placeholder: Comparison of 1D root-finding visualization and a multidimensional Jacobian matrix representation to hint at upcoming topics.]**
