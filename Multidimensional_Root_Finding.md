@@ -315,5 +315,6 @@ Code used to generate GIF of Newton's Method used in 3D
 ```
 
 ## References
-
-1.<a id="ref1"></a> Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Chapter 9: Root finding and nonlinear sets of equations. In *Numerical recipes: The art of scientific computing* (3rd ed.). New York: Cambridge University Press. ISBN 978-0-521-88068-8.
+1.<a id="ref1"></a>3.4 Broyden’s method. Washington University in St. Louis Engineering. (n.d.). https://classes.engineering.wustl.edu/2010/spring/ese415/ch3-4.pdf 
+2.<a id="ref1"></a> Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Chapter 9: Root finding and nonlinear sets of equations. In *Numerical recipes: The art of scientific computing* (3rd ed.). New York: Cambridge University Press. ISBN 978-0-521-88068-8.
+3.<a id="ref1"></a>Daekin, R. E. (2017, December). Solutions of Kepler’s equation. http://www.mygeodesy.id.au/documents/Solutions%20of%20Keplers%20Equation.pdf 
