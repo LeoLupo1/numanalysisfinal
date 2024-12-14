@@ -7,8 +7,7 @@ Title: Challenges and Methods in Multidimensional Root Finding
 # Table of Contents
 - [Introduction](#introduction)
 - [Hisorical Significance](#historical-significance)
-- [Key Methods](#key-methods)
-- [Challenges](#challenges)
+- [Strengths and Challenges of Euler's Method](#strengths-and-challenges-of-euler's-method)
 - [Applications](#applications)
 - [Conclusion](#conclusion)
 - [References](#references)
@@ -20,7 +19,7 @@ Title: Challenges and Methods in Multidimensional Root Finding
 
 This article explores multidimensional root-finding methods, providing an overview of how a few key approaches work, their unique characteristics, and the factors that make solving these problems more complex than their one-dimensional counterparts.
 
-All Graphics used in this Project were made in Desmos, here is a link to the project "files"
+All Graphics used in this Project were made in GIFsmos, here is a link to the project files used.
 
 ## Historical Significance
 
@@ -150,6 +149,61 @@ To break this down: while the standard Newton-Raphson method adjusts estimates b
 **[Image Placeholder: Graphical representation comparing first-order and second-order Newton-Raphson convergence.]**
 
 This iterative process quickly converged to the true value of E, especially for small eccentricities. The success of this approach in solving Kepler's Equation highlights the importance of root-finding methods and their transformative impact on scientific computation. This historical foundation will guide the exploration of how such techniques extend into multidimensional contexts, addressing the added complexities and opportunities they present.
+
+# Strengths and challenges of Newton's Method
+
+Newton's Method is highly effective in certain types of multidimensional problems, particularly when the equations and conditions align well. These are the scenarios where it excels:
+
+#### **1. Well-Conditioned Jacobians**
+- Newton's Method performs best when the Jacobian matrix is stable and invertible (not singular or poorly conditioned). A well-behaved Jacobian ensures smooth progression toward the root.
+- **Example:** Systems of equations with minimal interaction between variables, such as weakly coupled systems in mechanics or circuits.
+
+#### **2. Smooth, Differentiable Functions**
+- The method thrives on functions that are continuously differentiable and exhibit locally quadratic behavior near the root.
+- **Example:** Optimization problems in physics or engineering where gradients are predictable and regular, such as energy minimization in a mechanical system.
+
+#### **3. Close Initial Guesses**
+- When the starting point is near the actual root, Newton's Method converges quadratically, meaning the number of correct digits doubles with each iteration.
+- **Example:** Solving design optimization problems where a good initial guess is available from prior analysis or simulation.
+
+---
+
+### Failures of Newton's Method
+
+While powerful, Newton's Method has limitations that can prevent it from working effectively in some cases:
+
+#### **1. Poor Initial Guesses**
+- The method is highly sensitive to the starting point. A guess far from the root can lead to divergence or convergence to the wrong solution.
+- **Example:** Functions with multiple roots or saddle points can mislead the method, causing oscillations or divergence.
+
+#### **2. Singular or Ill-Conditioned Jacobians**
+- If the Jacobian matrix is singular or nearly singular, the method fails because the matrix cannot be reliably inverted.
+- **Example:** Systems with strongly interdependent variables or nearly parallel constraints can cause numerical instability.
+
+---
+
+### Introducing Broyden's Method
+
+Broyden’s Method addresses some of these limitations by approximating the Jacobian matrix rather than recalculating and inverting it at each iteration. This makes it more robust and computationally efficient in challenging scenarios.
+
+#### **Key Advantages of Broyden's Method**
+
+1. **Efficient Jacobian Updates**
+   - Instead of recalculating the Jacobian, Broyden’s Method updates an approximation using previous iterations. This reduces computational cost and avoids repeated matrix inversions.
+
+2. **Robustness in Singular Scenarios**
+   - By sidestepping direct Jacobian inversion, the method can continue iterating even when the true Jacobian is singular or poorly conditioned.
+
+3. **Scalability**
+   - Broyden’s Method scales better for high-dimensional problems, where recalculating and inverting a large Jacobian matrix at each step would be computationally prohibitive.
+
+---
+
+### Next Steps
+
+In the following section, we’ll explore Broyden’s Method in detail. This will include its algorithm, practical implementation, and examples of its application to multidimensional systems. By comparing it to Newton’s Method, we’ll highlight its strengths and limitations in real-world contexts.
+
+
 
 **[Image Placeholder: Comparison of 1D root-finding visualization and a multidimensional Jacobian matrix representation to hint at upcoming topics.]**
 
