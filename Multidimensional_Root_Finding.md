@@ -50,7 +50,7 @@ $$
 
 The formula predicts the root $x_{n+1}$ by subtracting the last root predicted, in this case the x-intercept of the tangent line, by the value of the function at that point over the derivative of the function at that point.
 
-4. Plug that new value back into the function and repeat until satisfied.
+4. Plug that new value back into the function and repeat until satisfied. [2]
 
 ### Approximating the solution to Kepler's Equation using Newton's Method:
 
@@ -127,7 +127,7 @@ After running Euler's Method on Kepler's Equations 3 times, yeilding E3, it very
 
 ### Newton’s Method in Two Dimensions
 
-In one dimension, Newton's Method adjusts guesses for a root based on the slope of the function at a given point. In two (or more) dimensions, we generalize this idea to a system of equations. Instead of dealing with a single derivative, we now work with a matrix of partial derivatives, the Jacobian matrix, which captures how each function in the system depends on each variable.
+In one dimension, Newton's Method adjusts guesses for a root based on the slope of the function at a given point. In two (or more) dimensions, we generalize this idea to a system of equations. Instead of dealing with a single derivative, we now work with a matrix of partial derivatives, the Jacobian matrix, which captures how each function in the system depends on each variable. [2]
 
 This approach enables us to iteratively approximate the solution to a system of nonlinear equations:
 
@@ -347,7 +347,7 @@ Broyden’s Method addresses some of these limitations by approximating the Jaco
 
      ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BB%7D_0%20%3D%20%5Cmathbf%7BI%7D)
 
-   - The method avoids recalculating the Jacobian matrix by updating the approximation iteratively using information from previous steps.
+   - The method avoids recalculating the Jacobian matrix by updating the approximation iteratively using information from previous steps. [4]
 
 2. **Iterative Updates**
    - At each iteration \( n \):
