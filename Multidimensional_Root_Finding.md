@@ -180,7 +180,7 @@ While powerful, Newton's Method has limitations that can prevent it from working
 - If the Jacobian matrix is singular or nearly singular, the method fails because the matrix cannot be reliably inverted.
 - **Example:** Systems with strongly interdependent variables or nearly parallel constraints can cause numerical instability.
 
-### Introducing Broyden's Method
+### Alternative Methods to Address Failures of Newton's Method
 
 Broyden’s Method addresses some of these limitations by approximating the Jacobian matrix rather than recalculating and inverting it at each iteration. This makes it more robust and computationally efficient in challenging scenarios.
 
