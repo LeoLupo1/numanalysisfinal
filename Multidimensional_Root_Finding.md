@@ -126,10 +126,10 @@ $$
 Below is a graphical representation of this process:
 
 
-![Newton's Method Visualization](images/newton1.gif)
+![Newton's Method Visualization](images/newton2.gif)
 
 
-The black vertical dotted line represents the root of Kepler's function in this example
+The black vertical dotted line represents the actual root of Kepler's function in this example
 
 ### Enhanced Techniques from Modern Applications
 
