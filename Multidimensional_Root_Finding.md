@@ -311,8 +311,9 @@ $$
 \mathbf{x}_7 = \begin{bmatrix} 0.6180339887498948 \\ 0.7861513777598889 \end{bmatrix}
 $$
 
-![GIF Here: Iterative points converge on the intersection curve of the two surfaces.]
+![3D Newton's Method Visualization](images/3d.gif)
 
+In this visualization, we can see
 
 
 ## Strengths and Challenges
