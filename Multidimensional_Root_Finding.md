@@ -154,39 +154,162 @@ Newton's Method in two dimensions updates the current guess:
 where:
 
 - ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D)%20%3D%20%5Bf_1(x%2C%20y)%2C%20f_2(x%2C%20y)%5D%5ET),
-- ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D)) is the Jacobian matrix:
-  ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D)%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Cfrac%7B%5Cpartial%20f_1%7D%7B%5Cpartial%20x%7D%20%26%20%5Cfrac%7B%5Cpartial%20f_1%7D%7B%5Cpartial%20y%7D%20%5C%5C%20%5Cfrac%7B%5Cpartial%20f_2%7D%7B%5Cpartial%20x%7D%20%26%20%5Cfrac%7B%5Cpartial%20f_2%7D%7B%5Cpartial%20y%7D%20%5Cend%7Bbmatrix%7D)
+- ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D)%20%3D%20%5Cbegin%7Bbmatrix%7D%20%5Cfrac%7B%5Cpartial%20f_1%7D%7B%5Cpartial%20x%7D%20%26%20%5Cfrac%7B%5Cpartial%20f_1%7D%7B%5Cpartial%20y%7D%20%5C%5C%20%5Cfrac%7B%5Cpartial%20f_2%7D%7B%5Cpartial%20x%7D%20%26%20%5Cfrac%7B%5Cpartial%20f_2%7D%7B%5Cpartial%20y%7D%20%5Cend%7Bbmatrix%7D)
 
-For our system:
+Jacobian of the circle and parabola:
 
 ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(x%2C%20y)%20%3D%20%5Cbegin%7Bbmatrix%7D%202x%20%26%202y%20%5C%5C%201%20%26%20-2y%20%5Cend%7Bbmatrix%7D)
 
-#### **Step-by-Step Example**
+### Step-by-Step Iterations of 2D Newton's Method
 
-Let’s start with an initial guess:
+We solve the system of equations:
 
-![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_0%20%3D%20%5B0.5%2C%200.5%5D%5ET)
+$$
+\begin{aligned}
+f_1(x, y) &= x^2 + y^2 - 1, \\
+f_2(x, y) &= x - y^2.
+\end{aligned}
+$$
 
-**Iteration 1:**
+Using the 2D Newton's Method formula:
 
-   ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_0)%20%3D%20%5Cbegin%7Bbmatrix%7D%20(0.5)%5E2%20%2B%20(0.5)%5E2%20-%201%20%5C%5C%200.5%20-%20(0.5)%5E2%20%5Cend%7Bbmatrix%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20-0.5%20%5C%5C%200.25%20%5Cend%7Bbmatrix%7D)
+$$
+\mathbf{x}_{n+1} = \mathbf{x}_n - \mathbf{J}(\mathbf{x}_n)^{-1} \mathbf{F}(\mathbf{x}_n),
+$$
 
-   ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D_0)%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%20-1%20%5Cend%7Bbmatrix%7D)
+where:
 
-   Solve:
-   ![Equation](https://latex.codecogs.com/gif.latex?%5CDelta%20%5Cmathbf%7Bx%7D_0%20%3D%20%5Cmathbf%7BJ%7D(%5Cmathbf%7Bx%7D_0)^{-1}%20%5Cmathbf%7BF%7D(%5Cmathbf%7Bx%7D_0))
+$$
+\mathbf{F}(\mathbf{x}) = \begin{bmatrix} f_1(x, y) \\ f_2(x, y) \end{bmatrix}, \quad
+\mathbf{J}(x, y) = \begin{bmatrix}
+\frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+\frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y}
+\end{bmatrix} = \begin{bmatrix}
+2x & 2y \\
+1 & -2y
+\end{bmatrix}.
+$$
 
-   Update:
-   ![Equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7Bx%7D_1%20%3D%20%5Cmathbf%7Bx%7D_0%20-%20%5CDelta%20%5Cmathbf%7Bx%7D_0)
+We start with the initial guess $\mathbf{x}_0 = \begin{bmatrix} 0.2 \\ 0.2 \end{bmatrix}$ and compute the next values iteratively.
 
-#### **Visualizing the Process**
 
-To illustrate, we generate a 3D visualization. While the problem is inherently 2D, the functions are plotted as surfaces in 3D space:
+#### **Iteration 0: Initial Guess**
+$$
+\mathbf{x}_0 = \begin{bmatrix} 0.2 \\ 0.2 \end{bmatrix}
+$$
+$$
+\mathbf{F}(\mathbf{x}_0) = \begin{bmatrix}
+0.2^2 + 0.2^2 - 1 \\
+0.2 - 0.2^2
+\end{bmatrix} = \begin{bmatrix}
+-0.96 \\
+0.16
+\end{bmatrix}
+$$
+$$
+\mathbf{J}(\mathbf{x}_0) = \begin{bmatrix}
+2(0.2) & 2(0.2) \\
+1 & -2(0.2)
+\end{bmatrix} = \begin{bmatrix}
+0.4 & 0.4 \\
+1 & -0.4
+\end{bmatrix}
+$$
 
-- $$z = f_1(x, y)$$,
-- $$z = f_2(x, y)$$.
+Solve:
 
-The intersection curve represents the solutions.
+$$
+\mathbf{x}_1 = \mathbf{x}_0 - \mathbf{J}(\mathbf{x}_0)^{-1} \mathbf{F}(\mathbf{x}_0)
+$$
+
+Result:
+
+$$
+\mathbf{x}_1 = \begin{bmatrix} 0.7428571428571429 \\ 1.9571428571428569 \end{bmatrix}
+$$
+
+---
+
+#### **Iteration 1**
+$$
+\mathbf{x}_1 = \begin{bmatrix} 0.7428571428571429 \\ 1.9571428571428569 \end{bmatrix}
+$$
+$$
+\mathbf{F}(\mathbf{x}_1) = \begin{bmatrix}
+0.742857^2 + 1.957143^2 - 1 \\
+0.742857 - 1.957143^2
+\end{bmatrix} = \begin{bmatrix}
+3.573469388462849 \\
+-2.086530611537151
+\end{bmatrix}
+$$
+$$
+\mathbf{J}(\mathbf{x}_1) = \begin{bmatrix}
+2(0.742857) & 2(1.957143) \\
+1 & -2(1.957143)
+\end{bmatrix} = \begin{bmatrix}
+1.485714 & 3.914286 \\
+1 & -3.914286
+\end{bmatrix}
+$$
+
+Solve:
+
+$$
+\mathbf{x}_2 = \mathbf{x}_1 - \mathbf{J}(\mathbf{x}_1)^{-1} \mathbf{F}(\mathbf{x}_1)
+$$
+
+Result:
+
+$$
+\mathbf{x}_2 = \begin{bmatrix} 0.6243021346469627 \\ 1.1380646746491196 \end{bmatrix}
+$$
+
+---
+
+#### **Iteration 2**
+$$
+\mathbf{x}_2 = \begin{bmatrix} 0.6243021346469627 \\ 1.1380646746491196 \end{bmatrix}
+$$
+$$
+\mathbf{F}(\mathbf{x}_2) = \begin{bmatrix}
+0.624302^2 + 1.138065^2 - 1 \\
+0.624302 - 1.138065^2
+\end{bmatrix} = \begin{bmatrix}
+0.476682405639648 \\
+-0.672045149621038
+\end{bmatrix}
+$$
+$$
+\mathbf{J}(\mathbf{x}_2) = \begin{bmatrix}
+2(0.624302) & 2(1.138065) \\
+1 & -2(1.138065)
+\end{bmatrix} = \begin{bmatrix}
+1.248604 & 2.276129 \\
+1 & -2.276129
+\end{bmatrix}
+$$
+
+Solve:
+
+$$
+\mathbf{x}_3 = \mathbf{x}_2 - \mathbf{J}(\mathbf{x}_2)^{-1} \mathbf{F}(\mathbf{x}_2)
+$$
+
+Result:
+
+$$
+\mathbf{x}_3 = \begin{bmatrix} 0.6180514616567657 \\ 0.84056851423266 \end{bmatrix}
+$$
+
+---
+
+#### **Final Results**
+After 7 iterations, the solution converges to:
+
+$$
+\mathbf{x}_7 = \begin{bmatrix} 0.6180339887498948 \\ 0.7861513777598889 \end{bmatrix}
+$$
 
 ![GIF Here: Iterative points converge on the intersection curve of the two surfaces.]
 
