@@ -18,9 +18,7 @@ Title: Challenges and Methods in Multidimensional Root Finding
 
 ## Introduction
 
-This article explores multidimensional root-finding methods, providing an overview of how a few key approaches work, their unique characteristics, and the factors that make solving these problems more complex than their one-dimensional counterparts.
-
-Many of the GIFS used in this Project were made in GIFsmos, here is a link to the project files used.
+This article explores the techniques and challenges of multidimensional root-finding, a cornerstone of numerical analysis. Root-finding is essential for solving nonlinear systems that arise in diverse fields such as orbital mechanics, physics, and engineering. Starting with the historical development of Newton’s Method and its application to Kepler's Equation, the discussion expands into modern adaptations of these techniques, such as multidimensional Newton's Method and Broyden's Method. Through step-by-step examples and visualizations, the paper highlights the strengths, limitations, and practical applications of these methods. Finally, edge cases and improvements are discussed to show how numerical methods adapt to complex systems.
 
 ## Historical Significance
 
@@ -29,12 +27,6 @@ During the late 17th century, astronomers faced a pressing challenge: predicting
 $$
 M = E - esin(E)
 $$
-
-Where:
-
-- **M** is the mean anomaly (a measure of time within the orbital period).
-- **E** is the eccentric anomaly (related to the position of the planet along its orbit).
-- **e** is the orbital eccentricity (a measure of how elliptical the orbit is).
 
 Kepler's Equation is transcendental, meaning it involves a mix of algebraic and non-algebraic functions (in this case, trigonometric), making it impossible to solve exactly using standard algebraic methods. This means that iterative numerical techniques are required to approximate the solution for E. This posed a major problem for astronomers who needed precise planetary positions for navigation, calendar design, and understanding celestial mechanics.[1]
 
@@ -404,6 +396,9 @@ Even though Broyden's method generally makes up for where Newton's Method lacks,
    
 3. **Discontinuous Functions**
    - For functions with discontinuities, Broyden’s Method may struggle as the Jacobian approximation fails to account for abrupt changes.
+
+## Conclusion
+Root-finding techniques are integral to solving nonlinear systems across various scientific and engineering domains. This paper demonstrated how Newton's Method revolutionized problem-solving with its quadratic convergence and how it extends naturally to multidimensional systems through the use of Jacobians. The practical example of solving Kepler’s Equation underscored the method’s historical importance and adaptability. However, limitations such as sensitivity to initial guesses and poorly conditioned Jacobians emphasize the need for alternatives like Broyden’s Method, which enhances robustness by approximating Jacobians. Together, these methods illustrate how numerical techniques evolve to meet the demands of increasingly complex systems, providing the foundation for advancements in fields like orbital mechanics and optimization.
 
 ## Pseudocode
 ```text
